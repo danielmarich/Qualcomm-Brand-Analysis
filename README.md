@@ -1,5 +1,5 @@
 # Qualcomm-Brand-Analysis
-This Final Group Project for IST 6620, Business Analytics was a cumulative presentation of a semester-long project to display the skills required to produce a business analysis that produced a dashboard written in R, a language and environment for statistical computing and graphics. The objective of this project was to use R to process and analyze data from a questionnaire created and distributed to members of the public via the Qualtrics survey system to answer business questions: 
+This Final Group Project for IST 6620, Business Analytics was a cumulative presentation of a semester-long project to display the skills required to produce a business analysis that utilized a dashboard written in R, a language and environment for statistical computing and graphics. The objective of this project was to use R to process and analyze data from a questionnaire created and distributed to members of the public via the Qualtrics survey system to answer business questions: 
 
 1) What customer target markets should Qualcomm focus its marketing campaign toward to increase its brand recognition as a U.S.-based semiconductor company?
 
