@@ -1,0 +1,129 @@
+---
+title: "Final Group Project Report"
+author: "Long,Marlon | Marich,Daniel | Singh,Satnam"
+date: "2022-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<div align="center">**Final Group Project Report - Qualcomm Brand Analysis**
+<div align="center">**IST 6620 Business Analytics - Fall 2022**
+<div align="center">**Professor Dr. Essia Hamouda**
+
+<div align="center">**Group Members: Marlon Long, Daniel Marich, Satnam Singh**
+
+<div align="justify">##### **1. Introduction**
+
+<div align="justify">Qualcomm is a business-to-business company that sells computer chips to phone manufacturers. The publicly traded company has 150 locations in 37 countries employing over 51,000 full-time, part-time, and temporary employees (Qualcomm Inc, 2022) with annual revenue of $33.5 billion in 2021 (Moorhead, 2021). Qualcomm is divided into three strategic business units (SBU) QCT (wireless semiconductors and other computer chip products), QTL (licenses or rights to used proprietary technology), and QSL (strategic investments in new technologies: IoT, AI, automotive). The QCT segment brings in 70% of the company's revenue primarily from its Snapdragon family of semiconductors for wireless products, and it is based on a business model of hiring manufacturers to produce the semiconductor-based on custom orders from consumer product manufacturers primarily cellphone makers Samsung and Apple.
+
+<div align="justify">Qualcomm’s business model currently relies heavily on contract purchases from large phone manufacturers, and recent investments by Apple to begin making their own wireless semiconductors for their iPhones will dramatically impact demand in the future. To address this shortcoming in the business model, Qualcomm has begun to invest in partnerships within the emerging IoT device market. These efforts highlight a second shortcoming : the end consumer's lack of brand recognition. Many end users do not know that Qualcomm semiconductor technology is used in high-tech products used by millions every day. CEO Christian Amon has relaunched the company’s marketing efforts to promote Qualcomm directly to the customer to address this shortcoming.  These efforts to build brand recognition are designed to build value throughout the supply chain from U.S based designs, through contracted semiconductor foundries, to high-tech product manufacturers, and finally into the hands of the consumer. 
+
+<div align="justify">In addition to Qualcomm being a leader in the wireless design technologies that form the standards for the marketplace, Qualcomm employs a highly responsive ‘fabless’ supply chain business model.  A fabless semiconductor company like Qualcomm outsources the fabrication (manufacturing) of its designed semiconductor chips to a foundry that specializes in producing silicon wafers and other semiconductor products according to the fabless semiconductor company’s specifications. The strengths of a fabless semiconductor production process are that it allows Qualcomm to reduce supply chain costs and increases supply chain responsiveness. To address the shortcomings of a fabless production process such as loss of quality or competing interests by the foundries, Qualcomm developed the “integrated fabless manufacturing” (IFM) strategy to oversee all aspects of the production process including manufacturing, testing, packaging, and shipping by third-party contractors from its United States based headquarters. With several fabless semiconductor companies based around the world and with the renewed emphasis on the importance of semiconductor production to U.S. national security, it remains to be determined if there is a competitive advantage for Qualcomm being a U.S-based fabless semiconductor company.
+
+##### **2. Objective**
+
+<div align="justify">The business analysis aims to address 1) the shortcoming associated with Qualcomm’s current brand recognition as a U.S based company, and 2) whether there is a competitive advantage of being recognized as a U.S based semiconductor company. To achieve these objectives the following questions were formulated to be answered by this report:
+
+1.	What customer target markets should Qualcomm focus its marketing campaign toward to increase its brand recognition as a U.S.-based semiconductor company?
+2.	Is there a competitive advantage of being recognized as a US-based semiconductor company that can build value for Qualcomm’s customers?
+
+These questions were formulated because the data needed to be collected to answer these business questions will not only provide descriptive data on Qualcomm’s current brand recognition, but the results should also provide prescriptive data on how to focus future efforts to build Qualcomm’s brand recognition as a U.S-based semiconductor company and the competitive advantage from being recognized as a U.S-based semiconductor company.
+
+##### **3. Data Collection**
+
+To gather the data required to answer the business questions posed above, a questionnaire was created and distributed to members of the public via the Qualtrics survey system available to CSUSB students. Many of the respondents are students at California State University, San Bernardino. The online questionnaire was designed to provide data associated with the semiconductor industry market, and it gathered data about the respondents’ demographics, interests, social media usage, TV/streaming service usage, semiconductor company brand recognition, Internet of Things (IoT) usage, and the importance of U.S.-based semiconductors in the IoT device purchases. The questionnaire collected 50 data points across 30 questions. The questionnaire was conducted from October 10, 2022 to October 29, 2022, and it resulted in 217 completed observations.
+
+
+
+| Variables  | Description |
+| ---------  | ----------- |
+| Age        |  Respondent Age |
+| Gender     | Respondent Gender (m,f,other) |
+| Marital Status   | Respondent’s marital status (i.e. single, married, divorced, etc.) |
+| Education    | Respondent’s highest level of education |
+| Employment Status    | Respondent’s employment status over the last three months |
+| Total Household Income    | Respondent Total Household income within six categorical income ranges. |
+| Average Hours Using Social Media    | Respondent’s use of social media platforms: Facebook, Instagram, Twitter, Snapchat, and TikTok. |
+| Average Hours Watching TV/Streaming Services    | Respondent’s time watching TV and streaming services: Cable television, YouTube, Netflix, Amazon Prime, others. |
+| Important in Daily Life    | Respondent rates the importance of certain characteristics activities, services, or concepts in their daily life. |
+| Brand Recognized    | Respondent is asked whether they recognize certain semiconductor company names (Intel, AMD, Nvidia, Qualcomm, Broadcom) |
+| Brand Recognition Rank    | Respondent ranks semiconductor companies by order of most recognized to least recognized (Intel, AMD, Nvidia, Qualcomm, Broadcom). |
+| Rank Importance of U.S based semiconductor chips    | Respondent ranks the importance of semiconductor chips being made in the United States on a scale of 1 to 10 with 10 being the highest of importance. |
+| Rank Importance of inexpensive semiconductor chips   | Respondent ranks the importance that semiconductors chips should be inexpensive on a scale of 1 to 10 with 10 being the highest of importance. |
+| Rank Importance of government-certified semiconductor chips    | Respondent ranks the importance of semiconductor chips being certified as secure by a government agency on a scale of 1 to 10 with 10 being the highest of importance. |
+| Own Cell Phone by Brand    | Respondent is asked which cell phone brand they own. |
+| Own Smartwatch    | Respondent is asked if they own any smartwatch. |
+| Have Used VR Headset    | Respondent is asked if they have used a virtual reality headset. |
+| Own VR Headset    | Respondent is asked if they own a virtual reality headset. |
+| Own a Car with Bluetooth    | Respondent is asked if they own a car with Bluetooth connectivity. |
+|Number of IoT Devices Owned    | Respondents are asked how many Internet of Things (IoT) devices they use daily. |
+| Rate Importance of IoT Semiconductors being made by U.S.-based companies    | Respondent ranks the importance of Internet of Thing devices that use semiconductor chips being designed by U.S-based companies on a scale of 1 to 10 with 10 being the highest of importance. |
+| Willing to Pay More for U.S Based Company Semiconductors   | Respondent is asked whether they would be willing to pay more for IoT devices built with semiconductor chips designed and sold by a U.S.-based company. |
+| How Much More Willing to Pay   | Respondent is asked how much more of a percentage of the sales price would they be willing to pay for IoT devices made with semiconductors designed and sold by a U.S-based company. |
+| Know Qualcomm is U.S.-based company   | Respondent is asked whether they know that Qualcomm is a U.S based multinational corporation |
+| Know Qualcomm semiconductors used in Samsung Phones   | Respondent is asked whether they know that Qualcomm semiconductor chips are used in Samsung cellular phone products |
+| Know Qualcomm semiconductors used in Apple Phones   | Respondent is asked whether they know that Qualcomm semiconductor chips are used in Apple iPhones products |
+| Know Qualcomm semiconductors used in Meta Quest 2    | Respondent is asked whether they know that Qualcomm SnapDragon semiconductor technology is used in Facebook’s virtual reality headsets Meta Quest 2 |
+| Know Qualcomm semiconductors used in Mercedes-Benz cars   | Respondent is asked whether they know that Qualcomm SnapDragon semiconductor technology is used in Mercedes-Benz cars |
+
+##### **4. Data Processing**
+
+The results from the Semiconductor Industry Questionnaire were downloaded from CSUSB Qualtrics system in CSV format.  The initial CSV file had 251 rows with two rows containing metadata for the column headers which included the question text and the import id string.  Qualtrics provides a data field that indicates whether the questionnaire was finished with a value of True or False which allowed us to clean the data to only observations that had been completed. The steps that were used to prepare the data for display were:
+
+1)	**Cleaned Qualtrics Data** - Selected all observations where the “Finished” metadata equaled “True” and placed them into a data frame called “cleandata.”
+2)	**Identified Only Required Variable Columns** - Then using the names() function, identified the header names for only the columns needed for our business analysis. 
+3)	**Select and Rename Data Column Names** – After identifying which columns were required for our display data, we wrote a script that created a new data frame with new field header names to make them more understandable while removing the Qualtrics metadata fields. For example, Q1 is written into the new data frame with the new header name “age” and the header name Q7_2 was renamed instagram_hrs.
+
+This process resulted in a data frame with 217 fully completed observations with easy-to-understand column names.
+
+The process to explore that data began with basic data analysis functions like str(), head(), and summary().  When running the summary() function, it was obvious that the class for every variable was ‘character.’  This was a reminder that many of the data variables would need to be converted to a ‘numeric’ class before they could be used in a computation.  Then the functions any(is.na(displaydata)) and colSums(is.na(displaydata)) were used to confirm that there were no ‘na’ values present in our data frame.  This was another advantage of only selecting observations that were completely finished during the first data cleaning step.
+
+Once the data set was cleaned, and formatted, and the initial exploration of its structure completed, the process of slicing the data took on many forms.  Histograms, density charts, and the pairs() function were used to begin to identify data comparisons that would help us answer our business questions.
+
+
+##### **5. Analysis**
+
+To answer the question, “What customer target markets should Qualcomm focus its marketing campaign toward to increase its brand recognition as a U.S.-based semiconductor company?” the primary variables used to were generated by the “Average Hours Using Social Media (Facebook, Instagram, Twitter, Snapchat, and TikTok),” and “Average Hours Watching TV/Streaming Services (Cable television, YouTube, Netflix, Amazon Prime, others).”  From this data, averages hours per day were generated for each social media platform and each TV/streaming service.  This data clearly showed that Instagram (1.59 hrs/day) and TikTok (1.64 hrs/day) were the top social media platforms based on the questionnaire results.  The data also clearly shows that Netflix (1.35 hrs/day) and YouTube (1.88 hrs/day) are by far the most used TV/Streaming services
+
+When the data generated by “Average Hours Using Social Media (Facebook, Instagram, Twitter, Snapchat, and TikTok),” and “Average Hours Watching TV/Streaming Services (Cable television, YouTube, Netflix, Amazon Prime, others)” is compared to Age Groups 18-24 years use the most Social Media platforms and watch the most TV/Streaming Services.  Based on the data, which can be further analyzed on the Qualcomm Project Dashboard under the Competitive Advantage tab, the target markets Qualcomm should focus on are both male and female users of Instagram, TikTok, and watchers of Netflix and YouTube. The age group that Qualcomm should target with their marketing campaigns should be 18 to 24 years olds.
+
+To answer the question “Is there a competitive advantage of being recognized as a US-based semiconductor company that can build value for Qualcomm’s customers?” the primary variable that provided data to answer this question was “pay_how_much_more_iot_us_chips.” The data for this variable was generated by the question “How much more (in percent of sales price) would you be willing to pay for IoT (Internet of Things) devices that are certified as built with semiconductor chips designed and sold by a United States based company?,” and the respondent could choose a value between zero and 100 in increments of 10.  This data was then compared across a number of other data variables generated by the following questions:  
+
+Do you recognize the company name Qualcomm? (recog_qualcomm)
+
+Do you recognize the company name Intel? (recog_intel)
+
+Would you be willing to pay more for IoT devices that are built with semiconductor chips designed and sold by a United States based company? (pay_more_us_chips)
+
+Did you know that Qualcomm is a U.S based multinational corporation? (know_qualcomm_us_comp)
+
+In addition, supplemental data was analyzed by taking calculating the mean for the following data variables generated by the following question
+
+On a scale from 1 (lowest) to 10 (highest) please rank how important each of the following statement are to you:
+
+Semiconductor chips should be made in the United States.
+
+Semiconductor chips should be certified as secure by a government agency.
+
+Importance of IoT devices U.S based company designed semiconductor chips.
+
+When analyzing the data by taking the average of how much more a questionnaire respondent was willing to pay over the sales price for Internet of Things devices made with U.S semiconductors, respondents clearly are willing to pay more. The results clearly show (as can be seen on the Qualcomm Project Dashboard under the Competitive Advantage tab that no matter how it is compared against other data variables, respondents are willing to pay between 10.6% and 33.94% above the sales price, if they know that the IoT device is made with semiconductors for a U.S=based company. This shows that there is a clear competitive advantage to being a U.S. base semiconductor company, and Qualcomm should make the most of this competitive advantage by promoting itself as a U.S based semiconductor company.
+
+##### **6. Conclusion**
+
+This business analysis of Qualcomm’s brand strategies and competitive advantage required a public questionnaire to answer the business shortcoming presented by this analysis. The business analysis aimed to address 1) the shortcoming associated with Qualcomm’s current brand recognition as a U.S based company, and 2) whether there is a competitive advantage of being recognized as a U.S based semiconductor company. To develop the data needed to answer these questions, a comprehensive questionnaire covering many aspects of the respondents’ to their knowledge and opinions on the semiconductor industry was required. The results and the analysis of the data through data science methodologies using the R programming language, shows that in order for Qualcomm to improve its brand exposure for the emerging IoT market they should target 18 to 24 year-olds who use Instagram or TikTok and watch Netflix or YouTube.  The results also show that there is a competitive advantage to Qualcomm being a U.S.-based semiconductor company, and that it can build value throughout the supply chain build value throughout the supply chain from Qualcomm, through contracted semiconductor foundries, to high-tech product manufacturers, and finally into the hands of the consumer.  This competitive advantage of being U.S.-based semiconductor company should be point of emphasis in future marketing campaigns.
+
+
+If given more time, a test survey would have been conducted and results analyzed to better understand how to focus the results to answer the business questions.  If a second survey was conducted, there would be more focus on the competitive advantage of being a U.S.-based semiconductor company and less on respondent interests.  It has become clear from this business analysis that Qualcomm has a distinct advantage as a ‘fabless’ semiconductor company based in the United States of American, and it is posed to take advantage of that characteristic as semiconductor production shift back to the domestic U.S. market.
+
+
+<div align="center"> **References**
+
+<div align="justify">Moorhead, P. (2021, November 18). _Qualcomm showcases diversification, growth, and resilience at Investor Day 2021._ Forbes. Retrieved March 29, 2022, from https://www.forbes.com/sites/patrickmoorhead/2021/11/18/qualcomm-showcases-diversification-growth-and-resilience-at-investor-day-2021/?sh=2a5469601a83 
+
+
+Qualcomm Inc. (2022, September 25). Form 10-K. Retrieved from https://www.sec.gov/edgar.shtml
+
+

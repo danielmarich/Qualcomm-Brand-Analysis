@@ -1,0 +1,287 @@
+---
+title: "Qualcomm Project Dashboard - Group 1"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: cerulean
+    orientation: row
+    vertical_layout: scroll
+
+---
+
+<!-- Load Required Libraries -->
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(knitr)
+library(DT)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+
+```
+
+<!-- Read Dataset CSV File  -->
+```{r}
+data = read.csv("siqdata.csv")
+
+```
+
+<!-- Clean Qualtrics Data -->
+```{r}
+cleandata = data %>% filter(Finished == "TRUE")
+```
+
+<!-- Select and Rename Data Column Names into new dataset-->
+```{r}
+displaydata <- select(cleandata, age = Q1, gender = Q2, marital_status = Q3, education = Q4, employment = Q5, income = Q6, facebook_hrs = Q7_1, instagram_hrs = Q7_2, twitter_hrs = Q7_3, snapchat_hrs = Q7_4, tiktok_hrs = Q7_5, network_tv_hrs = Q8_1, youtube_hrs = Q8_2, netflix_hrs =Q8_3, amazon_hrs = Q8_4, other_hrs = Q8_5, importance_tech = Q9_1, importance_internet = Q9_2, importance_pub_trans = Q9_3, importance_cell_phone = Q9_4, importance_social_media = Q9_5, importance_streaming_services = Q9_6, importance_online_privacy = Q9_7, importance_public_safety = Q9_8, importance_iot = Q9_9, importance_gaming = Q9_10, recog_intel = Q10, recog_amd = Q11, recog_nvidia = Q12, recog_qualcomm = Q13, recog_broadcom = Q14, rank_broadcom = Q15_1, rank_intel = Q15_2, rank_qualcomm = Q15_3, rank_amd = Q15_4, rank_nvidia = Q15_5, importance_chips_made_us = Q16_1, importance_chips_inexpensive = Q16_2, importance_chips_certified = Q16_3, cell_phone_brand = Q17, own_smartwatch = Q18, used_vr_headset = Q19, own_vr_headset = Q20, own_bluetooth_car = Q21, number_iot_devices = Q22, importance_iot_use_us_chips = Q23_1, pay_more_us_chips = Q24, pay_how_much_more_iot_us_chips = Q25_1, know_qualcomm_us_comp = Q26, know_qualcomm_in_samsung = Q27, know_qualcomm_in_iphone = Q28, know_qualcomm_in_quest = Q29, know_qualcomm_in_mercedes = Q30)
+```
+
+<!-- Dashboard Code Start -->
+Demographics
+==========================================
+
+row 
+----------------
+
+### 
+```{r}
+# valueBox(value, caption = NULL, icon = NULL, color = NULL, href = NULL)
+valueBox(nrow(displaydata), caption = "Total Observations", icon = "fa-users")
+```
+
+### 
+```{r}
+total_males <- displaydata %>% select(gender) %>% filter(gender == "Male") %>% count()
+valueBox(total_males, caption = "Males", icon="fa-mars")
+```
+
+### 
+```{r}
+total_females <- displaydata %>% select(gender) %>% filter(gender == "Female") %>% count()
+valueBox(total_females, caption = "Females", icon="fa-venus")
+```
+
+### 
+```{r}
+total_non <- displaydata %>% select(gender) %>% filter(gender == "Non-binary / third gender") %>% count()
+valueBox(total_non, caption = "Non-Binary", icon="fa-transgender")
+```
+
+
+row
+--------------
+
+### 
+```{r}
+age_groups = displaydata %>% group_by(age) %>% summarise(Count = n())
+ggplot(age_groups, aes(x=age, y = Count)) + geom_col(fill="lightblue") + ggtitle("Age Groups") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + scale_x_discrete(name = "Age", limit=c("Under 18", "18-24 years old", "25-34 years old", "35-44 years old", "45-54 years old", "55-64 years old"),  labels=c("Under 18" = "Under 18", "18-24 years old" = "18-24 y/o", "25-34 years old" = "25-34 y/o", "35-44 years old" = "35-44 y/o", "45-54 years old" = "45-54 y/o", "55-64 years old" = "55-64 y/o"))
+```
+
+### 
+```{r}
+
+
+phone_display <- displaydata %>% group_by(cell_phone_brand) %>% summarise(Count = n())
+
+ggplot(phone_display, aes(x=cell_phone_brand, y = Count)) + geom_col(fill="lightblue") + ggtitle("Cell Phone Brands") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + scale_x_discrete(name = "Cell Phone Brand")
+```
+
+Target Markets
+==========================================
+
+row
+--------------
+
+### 
+
+```{r}
+avg_facebook_hrs = round(mean(as.numeric(displaydata$facebook_hrs)), digits = 2)
+
+valueBox(avg_facebook_hrs, caption = "Facebook Hrs/Day", icon="fa-facebook")
+```
+
+### 
+
+```{r}
+avg_instagram_hrs = round(mean(as.numeric(displaydata$instagram_hrs)), digits = 2)
+
+valueBox(avg_instagram_hrs, caption = "Instagram Hrs/Day", icon="fa-instagram")
+```
+
+### 
+
+```{r}
+avg_twitter_hrs =  round(mean(as.numeric(displaydata$twitter_hrs)), digits = 2)
+
+
+valueBox(avg_twitter_hrs, caption = "Twitter Hrs/Day", icon="fa-twitter")
+```
+
+### 
+
+```{r}
+avg_snapchat_hrs =  round(mean(as.numeric(displaydata$snapchat_hrs)), digits = 2)
+valueBox(avg_snapchat_hrs, caption = "Snapchat Hrs/Day", icon="fab fa-snapchat")
+```
+
+### 
+```{r}
+avg_tiktok_hrs =  round(mean(as.numeric(displaydata$tiktok_hrs)), digits = 2)
+
+valueBox(avg_tiktok_hrs, caption = "TikTok Hrs/Day", icon="fab fa-tiktok ")
+```
+
+row 
+----------------
+
+### 
+```{r}
+ggplot(displaydata, aes(x = age , fill = instagram_hrs))+
+  geom_bar(color = "black") + coord_flip() + ggtitle("Instagram Hours by Age") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45))
+```
+
+### 
+```{r}
+ggplot(displaydata, aes(x = age , fill = tiktok_hrs))+
+  geom_bar(color = "black") + coord_flip() + ggtitle("Tiktok Hours by Age") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45))
+```
+
+row 
+----------------
+
+### 
+```{r}
+avg_netflix_hrs =  round(mean(as.numeric(displaydata$netflix_hrs)), digits = 2)
+
+valueBox(avg_netflix_hrs, caption = "Average Netflix Hrs/Day", icon="fab fa-netflix ")
+```
+### 
+```{r}
+avg_network_tv_hrs =  round(mean(as.numeric(displaydata$network_tv_hrs)), digits = 2)
+
+valueBox(avg_network_tv_hrs, caption = "Average TV/Cable Hrs/Day", icon="fab fa-networktv ")
+```
+### 
+```{r}
+avg_youtube_hrs =  round(mean(as.numeric(displaydata$youtube_hrs)), digits = 2)
+
+valueBox(avg_youtube_hrs, caption = "Average Youtube Hrs/Day", icon="fab fa-youtube ")
+```
+### 
+```{r}
+avg_amazon_hrs =  round(mean(as.numeric(displaydata$amazon_hrs)), digits = 2)
+
+valueBox(avg_amazon_hrs, caption = "Average Amazon Hrs/Day", icon="fab fa-amazon ")
+```
+
+row 
+----------------
+
+### 
+```{r}
+ggplot(displaydata, aes(x = age , fill = netflix_hrs))+
+  geom_bar(color = "black") + coord_flip() + ggtitle("Netflix Hours by age") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45))
+```
+
+### 
+```{r}
+ggplot(displaydata, aes(x = age , fill = youtube_hrs))+
+  geom_bar(color = "black") + coord_flip() + ggtitle("Youtube Hours by age") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45))
+```
+
+# Competitive Advantage
+
+row 
+----------------
+
+### 
+```{r}
+avg_import_us_made =  round(mean(as.numeric(displaydata$importance_chips_made_us)), digits = 2)
+
+valueBox(avg_import_us_made, caption = "Average Importance Semiconductors US Made", icon="")
+```
+### 
+```{r}
+avg_import_certified =  round(mean(as.numeric(displaydata$importance_chips_certified)), digits = 2)
+
+valueBox(avg_import_certified, caption = "Average Importance Semiconductors Certified", icon="")
+```
+### 
+```{r}
+avg_youtube_hrs =  round(mean(as.numeric(displaydata$importance_iot_use_us_chips)), digits = 2)
+
+valueBox(avg_youtube_hrs, caption = "Average Importance IoT Devices Use US Semiconductors", icon="")
+```
+
+row
+----------------
+### 
+```{r}
+total_observations <- nrow(displaydata)
+num_pay_more_yes <- displaydata %>% select(pay_more_us_chips) %>% filter(pay_more_us_chips == "Yes") %>% count()
+percent_pay_more <- round(num_pay_more_yes/total_observations * 100, digits = 2)
+
+valueBox(percent_pay_more, caption = "Percent of Participants Who are Willing to Pay More for IoT Devices made with U.S Semiconductors", icon="fa-percent")
+```
+
+### 
+```{r}
+avg_more_willing_pay =  round(mean(as.numeric(displaydata$pay_how_much_more_iot_us_chips)), digits = 2)
+
+valueBox(avg_more_willing_pay, caption = "Average More Willing to Pay Above Sale Price for IoT Devices with US made Semiconductors", icon="fa-percent")
+```
+
+### 
+```{r}
+pay_more_yes_how_much <- displaydata %>% select(pay_more_us_chips, pay_how_much_more_iot_us_chips) %>% filter(pay_more_us_chips == "Yes")
+
+avg_more_willing_pay_answer_yes = round(mean(as.numeric(pay_more_yes_how_much$pay_how_much_more_iot_us_chips)), digits = 2)
+
+valueBox(avg_more_willing_pay_answer_yes, caption = "Average Percentage More Willing to Pay Above Sales Price Who Answered Yes to more willing to Pay for IoT Devices with US made Semiconductors", icon="fa-percent")
+```
+
+row 
+----------------
+
+### 
+```{r}
+agg_tbl1 = displaydata %>% group_by(pay_more_us_chips) %>% summarise(mean_percent=round(mean(as.numeric(pay_how_much_more_iot_us_chips)), digits = 2), .groups = 'drop')
+
+pay_more_data1 <- agg_tbl1 %>% as.data.frame()
+
+ggplot(pay_more_data1, aes(x=pay_more_us_chips, y =  mean_percent )) + geom_col(fill="lightblue") + ggtitle("Percent More Willing to Pay for IoT Devices with U.S. Semiconductors") +
+  xlab("Willing to Pay More for IoT devices with U.S. Semiconductors") + ylab("Percentage") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + geom_text(aes(label = mean_percent))
+```
+
+### 
+```{r}
+agg_tbl3 = displaydata %>% group_by(know_qualcomm_us_comp) %>% summarise(mean_percent=round(mean(as.numeric(pay_how_much_more_iot_us_chips)), digits = 2), .groups = 'drop')
+
+pay_more_data3 <- agg_tbl3 %>% as.data.frame()
+
+ggplot(pay_more_data3, aes(x=know_qualcomm_us_comp, y =  mean_percent )) + geom_col(fill="lightblue") + ggtitle("Percent More Willing to Pay for IoT Devices with U.S. Semiconductors") +
+  xlab("Know Qualcomm is a U.S. Company") + ylab("Percentage") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + geom_text(aes(label = mean_percent))
+```
+
+row 
+----------------
+
+### 
+```{r}
+agg_tbl2 = displaydata %>% group_by(recog_qualcomm) %>% summarise(mean_percent=round(mean(as.numeric(pay_how_much_more_iot_us_chips)), digits = 2), .groups = 'drop')
+
+pay_more_data2 <- agg_tbl2 %>% as.data.frame()
+
+ggplot(pay_more_data2, aes(x=recog_qualcomm, y =  mean_percent )) + geom_col(fill="lightblue") + ggtitle("Percent More Willing to Pay for IoT Devices with U.S. Semiconductors") +
+  xlab("Recognize the Qualcomm Brand") + ylab("Percentage") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + geom_text(aes(label = mean_percent))
+```
+
+### 
+```{r}
+agg_tbl4 = displaydata %>% group_by(recog_intel) %>% summarise(mean_percent=round(mean(as.numeric(pay_how_much_more_iot_us_chips)), digits = 2), .groups = 'drop')
+
+pay_more_data4 <- agg_tbl4 %>% as.data.frame()
+
+ggplot(pay_more_data4, aes(x=recog_intel, y =  mean_percent )) + geom_col(fill="lightblue") + ggtitle("Percent More Willing to Pay for IoT Devices with U.S. Semiconductors") +
+  xlab("Recognize the Intel Brand") + ylab("Percentage") + theme(axis.text.x = element_text(color="black", size=10, angle=30), axis.text.y = element_text(color="black", size=10, angle=45)) + geom_text(aes(label = mean_percent))
+```
+
